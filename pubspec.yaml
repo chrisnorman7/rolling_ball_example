@@ -1,0 +1,17 @@
+name: rolling_ball_example
+description: A simple command-line application.
+version: 1.0.0
+# homepage: https://www.example.com
+publish_to: none
+environment:
+  sdk: ">=2.14.0-377.7.beta <3.0.0"
+
+dependencies:
+  dart_sdl: ^0.3.4
+
+dev_dependencies:
+  lints: ^1.0.0
+
+  ziggurat:
+    git:
+      url: https://github.com/chrisnorman7/ziggurat.git
