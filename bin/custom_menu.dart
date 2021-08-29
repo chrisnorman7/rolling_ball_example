@@ -65,7 +65,6 @@ class CustomMenu extends Menu {
   /// Play the activate sound if necessary.
   @override
   void activate() {
-    super.activate();
     final menuItem = currentMenuItem;
     final widget = menuItem?.widget;
     if (widget is Button) {
@@ -74,6 +73,7 @@ class CustomMenu extends Menu {
       game.interfaceSounds.playSound(
           SoundReference(CustomMenuItem.activateSound, SoundType.file));
     }
+    super.activate();
   }
 }
 
