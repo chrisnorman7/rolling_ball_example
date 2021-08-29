@@ -1,21 +1,26 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dart_sdl/dart_sdl.dart'
     show Sdl, GameControllerButton, ScanCode;
 import 'package:dart_synthizer/dart_synthizer.dart';
 import 'package:ziggurat/ziggurat.dart';
+import 'package:ziggurat_sounds/ziggurat_sounds.dart';
 
 import 'commands.dart';
 import 'custom_game.dart';
+import 'custom_menu.dart';
 import 'menus/main_menu.dart';
-import 'sound_manager.dart';
 
-void main() {
+Future<void> main() async {
   final sdl = Sdl()..init();
   final synthizer = Synthizer()..initialize();
   final ctx = synthizer.createContext();
   final random = Random();
-  final bufferStore = BufferStore(random, ctx.synthizer);
+  final bufferStore = BufferStore(random, ctx.synthizer)
+    ..addFile(File(CustomMenuItem.moveSound))
+    ..addFile(File(CustomMenuItem.activateSound))
+    ..addFile(File(CustomMenuItem.cancelSound));
   final soundManager = SoundManager(ctx, bufferStore);
   final game = CustomGame(soundManager);
   game.triggerMap
@@ -39,7 +44,8 @@ void main() {
         trigger: CommandTrigger(
             button: GameControllerButton.dpadLeft,
             keyboardKey: CommandKeyboardKey(ScanCode.SCANCODE_ESCAPE)));
-  final mainMenu = MainMenu(game);
+  final mainMenu =
+      MainMenu(game, await bufferStore.addFile(File('sounds/music/main.mp3')));
   game
     ..pushLevel(mainMenu)
     ..run(sdl);

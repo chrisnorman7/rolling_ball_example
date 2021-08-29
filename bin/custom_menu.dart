@@ -69,7 +69,9 @@ class CustomMenu extends Menu {
     final menuItem = currentMenuItem;
     final widget = menuItem?.widget;
     if (widget is Button) {
-      game.playSound(
+      sound?.destroy();
+      sound = null;
+      game.interfaceSounds.playSound(
           SoundReference(CustomMenuItem.activateSound, SoundType.file));
     }
   }
@@ -79,7 +81,11 @@ class CustomMenu extends Menu {
 class CustomMenuItem extends MenuItem {
   /// Create an instance.
   CustomMenuItem(String label, Widget widget)
-      : super(Message(text: label, sound: SoundReference.file(moveSound)),
+      : super(
+            Message(
+                text: label,
+                sound: SoundReference.file(moveSound),
+                keepAlive: true),
             widget);
 
   /// The default move sound.
