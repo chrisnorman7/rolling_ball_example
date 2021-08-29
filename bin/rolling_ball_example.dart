@@ -46,7 +46,8 @@ Future<void> main() async {
             keyboardKey: CommandKeyboardKey(ScanCode.SCANCODE_ESCAPE)));
   final mainMenu =
       MainMenu(game, await bufferStore.addFile(File('sounds/music/main.mp3')));
+  final now = DateTime.now().millisecondsSinceEpoch;
   game
-    ..pushLevel(mainMenu)
+    ..registerTask(500, () => game.pushLevel(mainMenu), timeOffset: now)
     ..run(sdl);
 }

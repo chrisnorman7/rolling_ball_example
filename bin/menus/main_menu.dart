@@ -16,7 +16,6 @@ class MainMenu extends CustomMenu {
       CustomMenuItem('Options', Button(() {
         final optionsMenu = OptionsMenu(game);
         game.pushLevel(optionsMenu);
-        optionsMenu.down();
       })),
       CustomMenuItem('Quit', Button(() {
         game
