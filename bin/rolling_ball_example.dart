@@ -24,7 +24,10 @@ Future<void> main() async {
     ..addFile(File(CustomMenu.cancelSound));
   final soundManager = SoundManager(ctx, bufferStore);
   final state = GameState();
-  final game = CustomGame(soundManager, state);
+  final game = CustomGame(
+      soundManager: soundManager,
+      state: state,
+      mainMenuMusic: await bufferStore.addFile(File('sounds/music/main.mp3')));
   game.triggerMap
     ..registerCommand(
         name: upCommandName,
@@ -45,9 +48,13 @@ Future<void> main() async {
         name: cancelCommandName,
         trigger: CommandTrigger(
             button: GameControllerButton.dpadLeft,
-            keyboardKey: CommandKeyboardKey(ScanCode.SCANCODE_ESCAPE)));
-  final mainMenu =
-      MainMenu(game, await bufferStore.addFile(File('sounds/music/main.mp3')));
+            keyboardKey: CommandKeyboardKey(ScanCode.SCANCODE_ESCAPE)))
+    ..registerCommand(
+        name: leaveMatchCommandName,
+        trigger: CommandTrigger(
+            keyboardKey: CommandKeyboardKey(ScanCode.SCANCODE_ESCAPE),
+            button: GameControllerButton.start));
+  final mainMenu = MainMenu(game: game, buffers: bufferStore);
   final now = DateTime.now().millisecondsSinceEpoch;
   game
     ..registerTask(500, () => game.pushLevel(mainMenu), timeOffset: now)

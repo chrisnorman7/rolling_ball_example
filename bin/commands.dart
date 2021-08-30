@@ -12,11 +12,5 @@ const activateCommandName = 'activate';
 /// Cancel a menu.
 const cancelCommandName = 'cancel';
 
-/// Move left on the pitch.
-const moveLeftCommandName = 'moveLeft';
-
-/// Move right on the pitch.
-const moveRightCommandName = 'moveRight';
-
-/// Bat the ball.
-const batCommandName = 'swingBat';
+/// Quit the current match.
+const leaveMatchCommandName = 'leaveMatch';

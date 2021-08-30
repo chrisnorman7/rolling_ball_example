@@ -16,7 +16,7 @@ enum DominantHand {
 @JsonSerializable()
 class GameState {
   /// Create an instance.
-  GameState({this.dominantHand = DominantHand.right});
+  GameState({this.dominantHand = DominantHand.right, this.playerSpeed = 500});
 
   /// Create an instance from a JSON object.
   factory GameState.fromJson(Map<String, dynamic> json) =>
@@ -24,6 +24,9 @@ class GameState {
 
   /// Which hand the player uses.
   DominantHand dominantHand;
+
+  /// The speed of the player.
+  int playerSpeed;
 
   /// Convert an instance to JSON.
   Map<String, dynamic> toJson() => _$GameStateToJson(this);

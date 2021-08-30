@@ -10,10 +10,12 @@ GameState _$GameStateFromJson(Map<String, dynamic> json) => GameState(
       dominantHand:
           _$enumDecodeNullable(_$DominantHandEnumMap, json['dominantHand']) ??
               DominantHand.right,
+      playerSpeed: json['playerSpeed'] as int? ?? 500,
     );
 
 Map<String, dynamic> _$GameStateToJson(GameState instance) => <String, dynamic>{
       'dominantHand': _$DominantHandEnumMap[instance.dominantHand],
+      'playerSpeed': instance.playerSpeed,
     };
 
 K _$enumDecode<K, V>(

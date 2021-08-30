@@ -5,13 +5,14 @@ import 'package:ziggurat/ziggurat.dart';
 class Pitch {
   /// Create a pitch.
   Pitch(
-      {required this.pitch,
+      {required this.width,
       required this.length,
       required this.footstepSound,
-      required this.crowdSound});
+      required this.crowdSound,
+      this.crowdGain = 0.2});
 
   /// The width of the pitch.
-  final int pitch;
+  final int width;
 
   /// The length of the pitch.
   final int length;
@@ -21,4 +22,7 @@ class Pitch {
 
   /// The sound of the crowd.
   final SoundReference crowdSound;
+
+  /// The gain of the crowd sound.
+  final double crowdGain;
 }
