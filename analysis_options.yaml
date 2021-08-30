@@ -1,6 +1,6 @@
 analyzer:
   exclude:
-    - lib/json/*.g.dart
+    - bin/json/*.g.dart
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false

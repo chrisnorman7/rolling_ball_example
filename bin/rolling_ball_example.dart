@@ -10,6 +10,7 @@ import 'package:ziggurat_sounds/ziggurat_sounds.dart';
 import 'commands.dart';
 import 'custom_game.dart';
 import 'custom_menu.dart';
+import 'json/game_state.dart';
 import 'menus/main_menu.dart';
 
 Future<void> main() async {
@@ -22,7 +23,8 @@ Future<void> main() async {
     ..addFile(File(CustomButton.activateSound))
     ..addFile(File(CustomMenu.cancelSound));
   final soundManager = SoundManager(ctx, bufferStore);
-  final game = CustomGame(soundManager);
+  final state = GameState();
+  final game = CustomGame(soundManager, state);
   game.triggerMap
     ..registerCommand(
         name: upCommandName,

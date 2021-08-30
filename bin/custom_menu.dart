@@ -90,3 +90,13 @@ class CustomButton extends Button {
   /// The default activate sound.
   static const activateSound = 'sounds/menus/activate.wav';
 }
+
+/// A mixin to provide a [cancel] method.
+mixin CancelMixin on Menu {
+  @override
+  void cancel() {
+    game
+      ..popLevel()
+      ..interfaceSounds.playSound(SoundReference.file(CustomMenu.cancelSound));
+  }
+}
