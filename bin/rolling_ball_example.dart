@@ -18,9 +18,9 @@ Future<void> main() async {
   final ctx = synthizer.createContext();
   final random = Random();
   final bufferStore = BufferStore(random, ctx.synthizer)
-    ..addFile(File(CustomMenuItem.moveSound))
-    ..addFile(File(CustomMenuItem.activateSound))
-    ..addFile(File(CustomMenuItem.cancelSound));
+    ..addFile(File(CustomMenu.moveSound))
+    ..addFile(File(CustomButton.activateSound))
+    ..addFile(File(CustomMenu.cancelSound));
   final soundManager = SoundManager(ctx, bufferStore);
   final game = CustomGame(soundManager);
   game.triggerMap

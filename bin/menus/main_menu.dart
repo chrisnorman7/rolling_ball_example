@@ -17,7 +17,7 @@ class MainMenu extends CustomMenu {
         final optionsMenu = OptionsMenu(game);
         game.pushLevel(optionsMenu);
       })),
-      CustomMenuItem('Quit', Button(() {
+      CustomMenuItem('Quit', CustomButton(() {
         game
           ..popLevel()
           ..registerTask(400, game.stop);
