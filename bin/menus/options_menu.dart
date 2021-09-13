@@ -13,12 +13,18 @@ class OptionsMenu extends CustomMenu with CancelMixin {
   OptionsMenu(CustomGame game)
       : super(game: game, title: Message(text: 'Game Options')) {
     menuItems.addAll([
-      CustomMenuItem('Change Dominant Hand', CustomButton(() {
-        game.pushLevel(SetHandMenu(game));
-      })),
-      CustomMenuItem('Return To Main Menu', CustomButton(() {
-        game.popLevel();
-      }))
+      CustomMenuItem(
+          'Change Dominant Hand',
+          CustomButton(() {
+            game.pushLevel(SetHandMenu(game));
+          }, game.soundManager.menuSounds),
+          game.soundManager.menuSounds),
+      CustomMenuItem(
+          'Return To Main Menu',
+          CustomButton(() {
+            game.popLevel();
+          }, game.soundManager.menuSounds),
+          game.soundManager.menuSounds)
     ]);
   }
 }

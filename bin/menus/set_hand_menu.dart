@@ -12,13 +12,15 @@ class SetHandMenu extends CustomMenu with CancelMixin {
     menuItems.add(CustomMenuItem(
         game.state.dominantHand == DominantHand.right
             ? 'Left Handed'
-            : 'Right Handed', CustomButton(() {
-      if (game.state.dominantHand == DominantHand.right) {
-        game.state.dominantHand = DominantHand.left;
-      } else {
-        game.state.dominantHand = DominantHand.right;
-      }
-      game.popLevel();
-    })));
+            : 'Right Handed',
+        CustomButton(() {
+          if (game.state.dominantHand == DominantHand.right) {
+            game.state.dominantHand = DominantHand.left;
+          } else {
+            game.state.dominantHand = DominantHand.right;
+          }
+          game.popLevel();
+        }, game.soundManager.menuSounds),
+        game.soundManager.menuSounds));
   }
 }

@@ -1,27 +1,21 @@
 /// Provides the [CustomGame] class.
 import 'package:dart_sdl/dart_sdl.dart';
 import 'package:ziggurat/ziggurat.dart';
-import 'package:ziggurat_sounds/ziggurat_sounds.dart';
 
+import 'custom_sound_manager.dart';
 import 'json/game_state.dart';
 import 'levels/pitch_level.dart';
 
 /// A custom game with a sound manager.
 class CustomGame extends Game {
-  CustomGame(
-      {required this.soundManager,
-      required this.state,
-      required this.mainMenuMusic})
+  CustomGame({required this.soundManager, required this.state})
       : super('Rolling Ball Example');
 
   /// The sound manager to use.
-  final SoundManager soundManager;
+  final CustomSoundManager soundManager;
 
   /// The current game state.
   final GameState state;
-
-  /// Main menu music.
-  final SoundReference mainMenuMusic;
 
   /// Start listening for sounds before calling super.
   @override

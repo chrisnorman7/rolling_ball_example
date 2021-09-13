@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:dart_sdl/dart_sdl.dart';
 import 'package:dart_synthizer/dart_synthizer.dart';
 import 'package:ziggurat/ziggurat.dart';
-import 'package:ziggurat_sounds/ziggurat_sounds.dart';
 
 import '../commands.dart';
 import '../custom_game.dart';
@@ -14,10 +13,7 @@ import '../pitch.dart';
 
 /// A level for playing on a pitch.
 class PitchLevel extends Level {
-  PitchLevel(
-      {required CustomGame game,
-      required this.pitch,
-      required BufferStore buffers})
+  PitchLevel({required CustomGame game, required this.pitch})
       : paused = false,
         coordinates = Point(pitch.width / 2, 0),
         lastMoved = 0,
@@ -26,7 +22,7 @@ class PitchLevel extends Level {
       paused = true;
       game
         ..popLevel()
-        ..pushLevel(MainMenu(game: game, buffers: buffers));
+        ..pushLevel(MainMenu(game: game));
     }));
   }
 
@@ -63,12 +59,9 @@ class PitchLevel extends Level {
     lastMoved = game.time;
     for (final controller in g.gameControllers.values) {
       final double movementAxis;
-      final double batAxis;
       if (g.state.dominantHand == DominantHand.right) {
-        batAxis = controller.getAxisSmall(GameControllerAxis.rightY);
         movementAxis = controller.getAxisSmall(GameControllerAxis.leftX);
       } else {
-        batAxis = controller.getAxisSmall(GameControllerAxis.leftY);
         movementAxis = controller.getAxisSmall(GameControllerAxis.rightX);
       }
       if (movementAxis != 0.0) {

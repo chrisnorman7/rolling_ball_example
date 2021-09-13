@@ -4,6 +4,8 @@ import 'package:dart_sdl/dart_sdl.dart'
 import 'package:ziggurat/ziggurat.dart';
 
 import 'commands.dart';
+import 'custom_game.dart';
+import 'menu_sounds.dart';
 
 /// A custom menu.
 ///
@@ -24,12 +26,6 @@ class CustomMenu extends Menu {
 
   /// The last time an axis event was used.
   int axisLastUsed;
-
-  /// The default move sound.
-  static const moveSound = 'sounds/menus/move.wav';
-
-  /// The default cancel sound.
-  static const cancelSound = 'sounds/menus/cancel.wav';
 
   /// Handle stick movement.
   @override
@@ -72,31 +68,25 @@ class CustomMenu extends Menu {
 /// A custom menu item, with its sound already loaded.
 class CustomMenuItem extends MenuItem {
   /// Create an instance.
-  CustomMenuItem(String label, Widget widget)
-      : super(
-            Message(
-                text: label,
-                sound: SoundReference.file(CustomMenu.moveSound),
-                keepAlive: true),
+  CustomMenuItem(String label, Widget widget, MenuBufferStore menuSounds)
+      : super(Message(text: label, sound: menuSounds.move, keepAlive: true),
             widget);
 }
 
 /// A button with an activate sound.
 class CustomButton extends Button {
   /// Create an instance.
-  CustomButton(void Function() onActivate)
-      : super(onActivate, sound: SoundReference.file(activateSound));
-
-  /// The default activate sound.
-  static const activateSound = 'sounds/menus/activate.wav';
+  CustomButton(void Function() onActivate, MenuBufferStore menuSounds)
+      : super(onActivate, sound: menuSounds.activate);
 }
 
 /// A mixin to provide a [cancel] method.
-mixin CancelMixin on Menu {
+mixin CancelMixin on CustomMenu {
   @override
   void cancel() {
     game
       ..popLevel()
-      ..interfaceSounds.playSound(SoundReference.file(CustomMenu.cancelSound));
+      ..interfaceSounds
+          .playSound((game as CustomGame).soundManager.menuSounds.cancel);
   }
 }
