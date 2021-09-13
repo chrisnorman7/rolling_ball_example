@@ -9,13 +9,23 @@ import 'levels/pitch_level.dart';
 /// A custom game with a sound manager.
 class CustomGame extends Game {
   CustomGame({required this.soundManager, required this.state})
-      : super('Rolling Ball Example');
+      : super('Rolling Ball Example') {
+    pitchReverb = createReverb(ReverbPreset('Pitch Reverb'));
+    ballSoundChannel =
+        createSoundChannel(position: SoundPosition3d(), reverb: pitchReverb);
+  }
 
   /// The sound manager to use.
   final CustomSoundManager soundManager;
 
   /// The current game state.
   final GameState state;
+
+  /// The channel for playing the ball sound.
+  late final SoundChannel ballSoundChannel;
+
+  /// The reverb to use for pitch sounds.
+  late final CreateReverb pitchReverb;
 
   /// Start listening for sounds before calling super.
   @override

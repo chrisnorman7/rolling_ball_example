@@ -19,7 +19,7 @@ class MainMenu extends CustomMenu {
           CustomButton(() {
             final pitch = Pitch(
                 width: 20,
-                length: 50,
+                length: 30,
                 footstepSound: game.soundManager.footstepSounds.wood,
                 crowdSound: game.soundManager.crowdSounds.nature);
             game.replaceLevel(PitchLevel(game: game, pitch: pitch),

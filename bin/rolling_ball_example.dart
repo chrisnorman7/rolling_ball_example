@@ -14,7 +14,8 @@ import 'menus/main_menu.dart';
 Future<void> main() async {
   final sdl = Sdl()..init();
   final synthizer = Synthizer()..initialize();
-  final ctx = synthizer.createContext();
+  final ctx = synthizer.createContext()
+    ..defaultPannerStrategy = PannerStrategies.hrtf;
   final random = Random();
   final soundManager = CustomSoundManager(random, ctx);
   await soundManager.load();
@@ -49,8 +50,13 @@ Future<void> main() async {
   final mainMenu = MainMenu(game: game);
   final now = DateTime.now().millisecondsSinceEpoch;
   game..registerTask(500, () => game.pushLevel(mainMenu), timeOffset: now);
-  await game.run(sdl);
-  sdl.quit();
-  ctx.destroy();
-  synthizer.shutdown();
+  try {
+    await game.run(sdl);
+  } catch (e) {
+    rethrow;
+  } finally {
+    sdl.quit();
+    ctx.destroy();
+    synthizer.shutdown();
+  }
 }
