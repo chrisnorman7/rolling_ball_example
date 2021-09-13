@@ -20,9 +20,7 @@ class PitchLevel extends Level {
         super(game, ambiances: [Ambiance(sound: pitch.crowdSound)]) {
     registerCommand(leaveMatchCommandName, Command(onStart: () {
       paused = true;
-      game
-        ..popLevel()
-        ..pushLevel(MainMenu(game: game));
+      game.replaceLevel(MainMenu(game: game), ambianceFadeTime: 1.0);
     }));
   }
 
