@@ -88,6 +88,9 @@ class PitchLevel extends Level {
     // Move the ball.
     ballCoordinates = coordinatesInDirection(
         ballCoordinates, ballDirection, (timeDelta / 1000) * ballSpeed);
+    if (ballCoordinates.y < 0 || ballCoordinates.y > pitch.length) {
+      ballDirection += 180;
+    }
     g.ballSoundChannel.position =
         SoundPosition3d(x: ballCoordinates.x, y: ballCoordinates.y);
     // Move the player.
