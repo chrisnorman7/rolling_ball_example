@@ -18,7 +18,6 @@ Future<void> main() async {
     ..defaultPannerStrategy = PannerStrategies.hrtf;
   final random = Random();
   final soundManager = CustomSoundManager(random, ctx);
-  await soundManager.load();
   final state = GameState();
   final game = CustomGame(soundManager: soundManager, state: state);
   game.triggerMap
@@ -47,9 +46,18 @@ Future<void> main() async {
         trigger: CommandTrigger(
             keyboardKey: CommandKeyboardKey(ScanCode.SCANCODE_ESCAPE),
             button: GameControllerButton.start));
-  final mainMenu = MainMenu(game: game);
   final now = DateTime.now().millisecondsSinceEpoch;
-  game..registerTask(500, () => game.pushLevel(mainMenu), timeOffset: now);
+  game.registerTask(0, () async {
+    await Future.wait([
+      soundManager.crowdSounds.load(),
+      soundManager.footstepSounds.load(),
+      soundManager.menuSounds.load(),
+      soundManager.miscSounds.load(),
+      soundManager.musicSounds.load()
+    ]);
+    final mainMenu = MainMenu(game: game);
+    game.pushLevel(mainMenu);
+  }, timeOffset: now);
   try {
     await game.run(sdl);
   } catch (e) {

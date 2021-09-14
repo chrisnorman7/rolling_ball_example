@@ -38,13 +38,4 @@ class CustomSoundManager extends SoundManager {
 
   /// Miscellaneous sounds.
   final MiscBufferStore miscSounds;
-
-  /// Load the attached buffer stores.
-  Future<void> load() async {
-    await musicSounds.load();
-    await menuSounds.load();
-    await crowdSounds.load();
-    await footstepSounds.load();
-    await miscSounds.load();
-  }
 }
