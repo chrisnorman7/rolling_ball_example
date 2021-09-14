@@ -23,7 +23,7 @@ class MainMenu extends CustomMenu {
                 footstepSound: game.soundManager.footstepSounds.wood,
                 crowdSound: game.soundManager.crowdSounds.nature);
             game.replaceLevel(PitchLevel(game: game, pitch: pitch),
-                ambianceFadeTime: 3.0);
+                ambianceFadeTime: 2.0);
           }, game.soundManager.menuSounds),
           game.soundManager.menuSounds),
       CustomMenuItem(
